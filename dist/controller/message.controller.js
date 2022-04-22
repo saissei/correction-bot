@@ -6,6 +6,7 @@ const lineMessageModel_1 = require("../model/lineMessageModel");
 const messageModel_1 = require("../model/messageModel");
 const line_presenter_1 = require("../presenter/line.presenter");
 const ReplyMessage_1 = require("../presenter/ReplyMessage");
+const lineClient = line_presenter_1.LinePresenter.init();
 class MessageController {
     static async handle(req, rep) {
         const signature = req.headers['x-line-signature'];
@@ -25,13 +26,12 @@ class MessageController {
             ReplyMessage_1.ReplyMessage.unauthorized(rep);
             return;
         }
-        ReplyMessage_1.ReplyMessage.success(rep, 'OK');
         if (!line_interactor_1.LineInteractor.messageTypeCheck(messageModel)) {
             return;
         }
-        const lineClient = line_presenter_1.LinePresenter.init();
         const textMessage = lineMessageModel_1.LineMessageModel.messageToLineMessage(messageModel);
         await lineClient.sendTextMessage(messageModel, textMessage);
+        ReplyMessage_1.ReplyMessage.success(rep, 'OK');
     }
 }
 exports.MessageController = MessageController;

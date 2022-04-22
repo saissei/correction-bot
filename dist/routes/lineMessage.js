@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const message_controller_1 = require("../controller/message.controller");
 exports.default = (server, opts, next) => {
-    server.post('/', opts, (req, rep) => {
-        console.log(req.body);
-        message_controller_1.MessageController.handle(req, rep);
+    server.post('/', opts, async (req, rep) => {
+        await message_controller_1.MessageController.handle(req, rep);
     });
     server.get('/', opts, (req, rep) => {
         rep.header('Content-Type', 'application/json').status(200).send('OK');

@@ -4,6 +4,7 @@ import { LineMessageModel } from "../model/lineMessageModel";
 import { MessageModel } from "../model/messageModel";
 import { LinePresenter } from "../presenter/line.presenter";
 import { ReplyMessage } from "../presenter/ReplyMessage";
+const lineClient = LinePresenter.init();
 
 export class MessageController {
   public static async handle (req: FastifyRequest, rep: FastifyReply): Promise<void> {
@@ -29,15 +30,14 @@ export class MessageController {
       return;
     }
 
-    ReplyMessage.success(rep, 'OK');
 
 
     if (!LineInteractor.messageTypeCheck(messageModel)) {
       return;
     }
 
-    const lineClient = LinePresenter.init();
     const textMessage = LineMessageModel.messageToLineMessage(messageModel);
     await lineClient.sendTextMessage(messageModel, textMessage);
+    ReplyMessage.success(rep, 'OK');
   }
 }
