@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx dotenv -e ./config/.env.development node ./dist/server/serverless.js",
+    "start": "node ./dist/server/serverless.js",
     "dev": "PORT=8000 npx dotenv -e ./config/.env.development ts-node-dev ./src/server/app.ts",
     "lint": "npx prettier --write src && npx eslint src --fix",
     "build": "npx rimraf dist && tsc --build",
