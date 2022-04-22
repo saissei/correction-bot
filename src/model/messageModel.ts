@@ -18,6 +18,7 @@ export type EventMessage = {
 }
 
 export type Events = {
+  destination: string;
   events: EventMessage[];
 };
 
@@ -25,7 +26,7 @@ export class MessageModel {
   private message: Events;
   private static validate (e: unknown): asserts e is Events {
     if (!e || e === null || typeof e !== 'object') return;
-    if ((e as Events).events === undefined) return;
+    if ((e as Events).events === undefined || (e as Events).destination === undefined) return;
   }
   public static check(message: unknown): MessageModel {
     this.validate(message);
@@ -41,6 +42,10 @@ export class MessageModel {
 
   public toJson (): Events {
     return this.message;
+  }
+
+  public destination(): string {
+    return this.message.destination;
   }
 
   public replyToken (): string {
