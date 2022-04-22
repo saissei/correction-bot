@@ -10,8 +10,7 @@ export class LineInteractor {
   }
 
   public static botCheck(messageModel: MessageModel): boolean {
-    const destination = messageModel.destination();
-    if (destination === 'U137ad8b8c2a7da79d6098270753e79e1') {
+    if (messageModel.destination() !== undefined && messageModel.toJson().events.length === 0) {
       return true;
     }
     return false;

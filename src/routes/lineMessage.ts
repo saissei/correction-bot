@@ -4,6 +4,7 @@ import { MessageController } from '../controller/message.controller';
 
 export default (server: FastifyInstance<Server, IncomingMessage, ServerResponse>, opts: RouteShorthandOptions, next: (err?: Error) => void): void => {
   server.post('/', opts, (req: FastifyRequest, rep: FastifyReply) => {
+    console.log(req.body)
     MessageController.handle(req, rep);
   });
 

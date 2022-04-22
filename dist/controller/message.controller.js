@@ -15,11 +15,17 @@ class MessageController {
             return;
         }
         const messageModel = messageModel_1.MessageModel.check(body);
-        ReplyMessage_1.ReplyMessage.success(rep, 'OK');
-        const verify = line_interactor_1.LineInteractor.signatureCheck(messageModel, signature);
-        if (!verify) {
+        const isBot = line_interactor_1.LineInteractor.botCheck(messageModel);
+        if (isBot) {
+            ReplyMessage_1.ReplyMessage.success(rep, 'OK');
             return;
         }
+        const verify = line_interactor_1.LineInteractor.signatureCheck(messageModel, signature);
+        if (!verify) {
+            ReplyMessage_1.ReplyMessage.unauthorized(rep);
+            return;
+        }
+        ReplyMessage_1.ReplyMessage.success(rep, 'OK');
         if (!line_interactor_1.LineInteractor.messageTypeCheck(messageModel)) {
             return;
         }

@@ -14,25 +14,23 @@ export class MessageController {
       return;
     }
     const messageModel = MessageModel.check(body);
-    // if (!messageModel) {
-    //   ReplyMessage.notFount(rep);
-    //   return;
-    // }
 
-    // const isBot = LineInteractor.botCheck(messageModel);
-    // if (isBot) {
-    //   ReplyMessage.success(rep, 'OK');
-    //   return;
-    // }
+    const isBot = LineInteractor.botCheck(messageModel);
+    if (isBot) {
+      ReplyMessage.success(rep, 'OK');
+      return;
+    }
 
-    ReplyMessage.success(rep, 'OK');
 
     const verify = LineInteractor.signatureCheck(messageModel, signature);
 
     if (!verify) {
-      // ReplyMessage.unauthorized(rep);
+      ReplyMessage.unauthorized(rep);
       return;
     }
+
+    ReplyMessage.success(rep, 'OK');
+
 
     if (!LineInteractor.messageTypeCheck(messageModel)) {
       return;
