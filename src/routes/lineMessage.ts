@@ -7,5 +7,9 @@ export default (server: FastifyInstance<Server, IncomingMessage, ServerResponse>
     MessageController.handle(req, rep);
   });
 
+  server.get('/', opts, (req: FastifyRequest, rep: FastifyReply) => {
+    rep.header('Content-Type', 'application/json').status(200).send('OK');
+  });
+
   next();
 };
