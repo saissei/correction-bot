@@ -1,0 +1,1 @@
+{"version":3,"file":"lineMessageModel.js","sourceRoot":"","sources":["../../src/model/lineMessageModel.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IACpB,MAAM,CAAC,oBAAoB,CAAE,YAA0B;QAC5D,MAAM,GAAG,GAAgB;YACvB,IAAI,EAAE,MAAM;YACZ,IAAI,EAAE,YAAY,CAAC,KAAK,EAAE;SAC3B,CAAC;QACF,OAAO,GAAG,CAAC;IACb,CAAC;CACF;AARD,4CAQC"}
