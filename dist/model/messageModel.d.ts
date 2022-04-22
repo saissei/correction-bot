@@ -15,6 +15,7 @@ export declare type EventMessage = {
     message: Message;
 };
 export declare type Events = {
+    destination: string;
     events: EventMessage[];
 };
 export declare class MessageModel {
@@ -24,6 +25,7 @@ export declare class MessageModel {
     private constructor();
     toString(): string;
     toJson(): Events;
+    destination(): string;
     replyToken(): string;
     userId(): string;
     parse(): string;

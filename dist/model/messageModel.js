@@ -8,7 +8,7 @@ class MessageModel {
     static validate(e) {
         if (!e || e === null || typeof e !== 'object')
             return;
-        if (e.events === undefined)
+        if (e.events === undefined || e.destination === undefined)
             return;
     }
     static check(message) {
@@ -20,6 +20,9 @@ class MessageModel {
     }
     toJson() {
         return this.message;
+    }
+    destination() {
+        return this.message.destination;
     }
     replyToken() {
         return this.message.events[0].replyToken;
